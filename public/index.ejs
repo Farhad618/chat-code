@@ -2,6 +2,15 @@ hi <span id="username"><%= username %></span>
 <a href="auth/logout">logout - <%= username %></a>
 <br>
 <span>room no: <%= roomno %></span>
+<br>
+chats:
+<div id="main-chat" class="" style="max-height: 1000px; max-width: 500px; border: 1px solid #000;">
+	
+</div>
+<form method="post" action="/auth/addchat">
+	<textarea name="chatcontent"></textarea>
+	<input type="submit" name="send" value="send">
+</form>
 
 
 

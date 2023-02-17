@@ -26,13 +26,14 @@ app.use('/auth/signup', require('./routes/signup'))
 app.use('/auth/signin', require('./routes/signin'))
 app.use('/auth/logout', require('./routes/logout'))
 app.use('/auth/getroom', require('./routes/getroom'))
+app.use('/auth/addchat', require('./routes/addchat'))
 
 // view routes
 app.use('/', express.static(path.join(__dirname, 'public')))
 app.get('/', (req, res)=>{
   username = req.session.username
   roomno = req.session.roomno
-  if (req.session.username) {
+  if (username) {
     if (roomno) {
       res.render('index', {username, roomno})
     }else{
