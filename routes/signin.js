@@ -9,8 +9,8 @@ router.post('/', (req, res)=>{
 	for(let user of users){
 		if (user.username == username && user.password == password) {
 			// res.send('User already exixts...')
-			res.locals.username = username
-			res.redirect('/index.html')
+			req.session.username = username
+			res.redirect('/')
 			return
 		}
 	}
