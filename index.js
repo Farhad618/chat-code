@@ -3,8 +3,12 @@ const path = require('path')
 const bodyParser = require('body-parser');
 const session = require("express-session")
 const { v4: uuidv4 } = require('uuid')
+const fs = require("fs")
+
+const chats = require("./db/chats.json");
 const app = express()
-const port = 3000
+const port = 3030
+
 
 // set views
 app.set('views', path.join(__dirname, 'public'))
@@ -27,6 +31,7 @@ app.use('/auth/signin', require('./routes/signin'))
 app.use('/auth/logout', require('./routes/logout'))
 app.use('/auth/getroom', require('./routes/getroom'))
 app.use('/auth/addchat', require('./routes/addchat'))
+app.use('/auth/allchats', require('./routes/allchats'))
 
 // view routes
 app.use('/', express.static(path.join(__dirname, 'public')))

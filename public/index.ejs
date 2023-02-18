@@ -1,11 +1,15 @@
+
+
 hi <span id="username"><%= username %></span>
 <a href="auth/logout">logout - <%= username %></a>
 <br>
 <span>room no: <%= roomno %></span>
 <br>
 chats:
-<div id="main-chat" class="" style="max-height: 1000px; max-width: 500px; border: 1px solid #000;">
-	
+<div class="" style="max-height: 1000px; max-width: 500px; border: 1px solid #000;">
+	<table id="main-chat">
+		
+	</table>
 </div>
 <form method="post" action="/auth/addchat">
 	<textarea name="chatcontent"></textarea>
@@ -13,6 +17,28 @@ chats:
 </form>
 
 
+<script type="text/javascript">	
+    setInterval(()=>{
+	    fetch("http://localhost:3030/auth/allchats", {
+	        method: "GET"
+	    }).then(function(response) {
+	        return response.json();
+	    }).then(function(chats){
+	        // console.log(chats);
+	        document.getElementById('main-chat').innerHTML = '' 
+	        for(let chat of chats){
+	        	document.getElementById('main-chat').innerHTML += `
+	        		<tr>
+	        			<td><b>${chat.username}: </b></td>
+	        			<td>${chat.chatcontent}</td>
+	        		</tr>
+	        	`
+	        }
+	    });
+		// console.log(9898)
+    }, 1000)
 
+	
+</script>
 
 
