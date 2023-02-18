@@ -6,7 +6,7 @@ hi <span id="username"><%= username %></span>
 <span>room no: <%= roomno %></span>
 <br>
 chats:
-<div class="" style="max-height: 1000px; max-width: 500px; border: 1px solid #000;">
+<div class="" id="main-chat-container" style="max-height: 500px; max-width: 300px; border: 1px solid #000; overflow: auto;">
 	<table id="main-chat">
 		
 	</table>
@@ -18,6 +18,8 @@ chats:
 
 
 <script type="text/javascript">	
+	var mainChatContainerElement = document.getElementById('main-chat-container')
+	var mainChatElement = document.getElementById('main-chat')
     setInterval(()=>{
 	    fetch("http://localhost:3030/auth/allchats", {
 	        method: "GET"
@@ -25,9 +27,9 @@ chats:
 	        return response.json();
 	    }).then(function(chats){
 	        // console.log(chats);
-	        document.getElementById('main-chat').innerHTML = '' 
+	        mainChatElement.innerHTML = '' 
 	        for(let chat of chats){
-	        	document.getElementById('main-chat').innerHTML += `
+	        	mainChatElement.innerHTML += `
 	        		<tr>
 	        			<td><b>${chat.username}: </b></td>
 	        			<td>${chat.chatcontent}</td>
@@ -35,6 +37,7 @@ chats:
 	        	`
 	        }
 	    });
+	    mainChatContainerElement.scrollTop = mainChatContainerElement.scrollHeight
 		// console.log(9898)
     }, 1000)
 
